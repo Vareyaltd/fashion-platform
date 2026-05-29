@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  username  String   @unique
+  avatar    String?
+  createdAt DateTime @default(now())
+  posts     Post[]
+  messages  ChatMessage[]
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  content   String
+  image     String?
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+  createdAt DateTime @default(now())
+  likes     Int      @default(0)
+}
+
+model Event {
+  id             String   @id @default(cuid())
+  title          String
+  creator        String
+  status         String   @default("Upcoming")
+  videoUrl       String?
+  viewers        Int      @default(0)
+  ticketPrice    Float    @default(0.1)
+  ticketCurrency String   @default("ETH")
+  createdAt      DateTime @default(now())
+}
+
+model ChatMessage {
+  id        String   @id @default(cuid())
+  eventId   String
+  content   String
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+  createdAt DateTime @default(now())
+}
