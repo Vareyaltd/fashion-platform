@@ -141,7 +141,7 @@ export default function CreateAvatarPage() {
                <img 
                  src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop" 
                  alt="Generated Avatar Outfit" 
-                 className="w-auto h-[80%] object-contain drop-shadow-[0_0_30px_rgba(0,240,255,0.4)] mix-blend-screen grayscale relative z-10" 
+                 className="w-auto h-[80%] object-contain drop-shadow-[0_0_30px_rgba(0,240,255,0.4)] mix-blend-screen grayscale-0 md:grayscale relative z-10" 
                  style={selectedColor ? { filter: `drop-shadow(0 0 20px ${selectedColor})` } : {}}
                />
                <p className="absolute bottom-10 text-neon-blue font-heading uppercase tracking-widest bg-black/50 px-4 py-2 backdrop-blur-md border border-white/10">

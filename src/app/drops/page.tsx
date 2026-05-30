@@ -44,7 +44,7 @@ export default function DropsPage() {
                 <img 
                   src={drop.img} 
                   alt={drop.name} 
-                  className="object-cover w-full h-full opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out grayscale group-hover:grayscale-0" 
+                  className="object-cover w-full h-full opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out grayscale-0 md:grayscale md:group-hover:grayscale-0" 
                 />
                 <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md border border-white/10 px-3 py-1">
                   <span className={`text-xs font-bold uppercase tracking-wider ${drop.status === 'Live Now' ? 'text-neon-blue' : 'text-silver'}`}>

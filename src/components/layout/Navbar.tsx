@@ -4,11 +4,13 @@ import Link from "next/link";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const { data: session } = useSession();
   const [showAuth, setShowAuth] = useState(false);
   const [authType, setAuthType] = useState<"login" | "join">("login");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -47,25 +49,79 @@ export default function Navbar() {
           {/* Right CTA */}
           <div className="flex items-center gap-4 relative z-50">
             {session ? (
-              <div className="flex items-center gap-4">
+              <div className="hidden md:flex items-center gap-4">
                 <span className="text-silver font-bold uppercase tracking-widest text-sm">@{session.user?.name}</span>
                 <button onClick={() => signOut()} className="text-sm bg-white text-black px-6 py-2 font-bold uppercase tracking-widest hover:bg-neon-purple hover:text-white transition-all">
                   Log Out
                 </button>
               </div>
             ) : (
-              <>
-                <button onClick={() => openAuth("login")} className="hidden sm:block text-sm font-bold uppercase tracking-widest text-white hover:text-neon-blue transition-colors">
+              <div className="hidden md:flex items-center gap-4">
+                <button onClick={() => openAuth("login")} className="text-sm font-bold uppercase tracking-widest text-white hover:text-neon-blue transition-colors">
                   Log In
                 </button>
                 <button onClick={() => openAuth("join")} className="text-sm bg-white text-black px-8 py-3 font-bold uppercase tracking-widest hover:bg-neon-blue hover:text-white transition-all">
                   Join
                 </button>
-              </>
+              </div>
             )}
+            
+            {/* Hamburger Button */}
+            <button 
+              className="md:hidden text-white ml-4 p-2 z-50"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
           </div>
         </div>
       </nav>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed inset-0 z-30 bg-matte-black/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8 px-6"
+          >
+            <Link href="/drops" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-bold uppercase tracking-widest text-white hover:text-neon-blue transition-colors">Drops</Link>
+            <Link href="/create" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-bold uppercase tracking-widest text-white hover:text-neon-purple transition-colors">AI Studio</Link>
+            <Link href="/runway" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-bold uppercase tracking-widest text-white hover:text-neon-blue transition-colors">Runway</Link>
+            <Link href="/community" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-bold uppercase tracking-widest text-white hover:text-neon-purple transition-colors">Community</Link>
+            
+            <div className="w-full h-px bg-white/10 my-4" />
+            
+            {session ? (
+              <div className="flex flex-col items-center gap-6 w-full">
+                <span className="text-silver font-bold uppercase tracking-widest text-xl">@{session.user?.name}</span>
+                <button 
+                  onClick={() => { signOut(); setMobileMenuOpen(false); }} 
+                  className="w-full max-w-xs bg-white text-black px-8 py-4 font-bold uppercase tracking-widest"
+                >
+                  Log Out
+                </button>
+              </div>
+            ) : (
+              <div className="flex flex-col items-center gap-4 w-full max-w-xs">
+                <button 
+                  onClick={() => { setMobileMenuOpen(false); openAuth("login"); }} 
+                  className="w-full border border-white/20 text-white px-8 py-4 font-bold uppercase tracking-widest"
+                >
+                  Log In
+                </button>
+                <button 
+                  onClick={() => { setMobileMenuOpen(false); openAuth("join"); }} 
+                  className="w-full bg-white text-black px-8 py-4 font-bold uppercase tracking-widest"
+                >
+                  Join
+                </button>
+              </div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Auth Modal Simulation */}
       <AnimatePresence>

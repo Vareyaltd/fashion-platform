@@ -37,7 +37,7 @@ export default function FeaturedDrops() {
                 <img 
                   src={drop.img} 
                   alt={drop.name} 
-                  className="object-cover w-full h-full opacity-50 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out grayscale group-hover:grayscale-0" 
+                  className="object-cover w-full h-full opacity-50 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out grayscale-0 md:grayscale md:group-hover:grayscale-0" 
                 />
                 
                 {/* Overlay details */}
