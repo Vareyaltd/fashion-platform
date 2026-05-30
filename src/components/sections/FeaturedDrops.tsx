@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const drops = [
   { id: 1, name: "CYBER-TRENCH X", price: "0.5 ETH", img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop" },
-  { id: 2, name: "NEON VISOR V2", price: "0.2 ETH", img: "https://images.unsplash.com/photo-1558244402-28c5316dbf58?q=80&w=2574&auto=format&fit=crop" },
+  { id: 2, name: "NEON VISOR V2", price: "0.2 ETH", img: "https://images.unsplash.com/photo-1535295972055-1c762f4483e5?q=80&w=2000&auto=format&fit=crop" },
   { id: 3, name: "HOLO-SNEAKERS", price: "0.8 ETH", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2670&auto=format&fit=crop" }
 ];
 
